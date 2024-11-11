@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace General;
 
@@ -89,4 +91,174 @@ public class SimpsonRuleCalc
 
         return sum * step / 6;
     }
+}
+
+
+/// <summary>
+/// Не знаю, что этот класс делает
+/// </summary>
+class Program
+{
+
+    static void Main(string[] args)
+    {
+        Bound A = new Bound(-1, 0, 100_000_000, 1); //1 тред = 0 тредов
+        var threads = new List<Thread>();
+
+        double resultSumM = 0.0;
+        double resultSumL = 0.0;
+        double resultSumT = 0.0;
+
+        Console.WriteLine("Интегрирование x*e^x на [-1,0] с 1 тредом");
+        var sw = new Stopwatch();
+        //на медианных суммах
+        sw.Start();
+        for (int tID = 1; tID <= A.ThreadCount; tID++)
+        {
+            threads.Add(new Thread((tID) =>
+            {
+                double PartialSum = 0.0;
+
+                for (int i = (int)tID; i <= A.precision + 1; i += A.ThreadCount)
+                {
+                    PartialSum += Function((double)i * A.Delta - (0.5) * A.Delta + A.Left) * A.Delta;
+                }
+                lock (threads) { resultSumM += PartialSum; }
+            }
+            ));
+            threads.Last().Start(tID);
+        }
+        foreach (var thread in threads) thread.Join();
+        sw.Stop();
+        Console.WriteLine("Результат {0} медианными суммами за {1}мс", resultSumM, sw.ElapsedMilliseconds);
+        //на медианных суммах
+
+        //на левых суммах
+        sw.Restart();
+        threads = new List<Thread>();
+        for (int tID = 1; tID <= A.ThreadCount; tID++)
+        {
+            threads.Add(new Thread((tID) =>
+            {
+                double PartialSum = 0.0;
+
+                for (int i = (int)tID; i <= A.precision + 1; i += A.ThreadCount)
+                {
+                    PartialSum += Function((i - 1) * A.Delta + A.Left) * A.Delta;
+                }
+                lock (threads) { resultSumL += PartialSum; }
+            }
+            ));
+            threads.Last().Start(tID);
+        }
+        foreach (var thread in threads) thread.Join();
+        sw.Stop();
+        Console.WriteLine("Результат {0} левыми суммами за {1}мс", resultSumL, sw.ElapsedMilliseconds);
+        //на левых суммах
+
+        //на трапезоидных суммах
+        sw.Restart();
+        threads = new List<Thread>();
+        for (int tID = 1; tID <= A.ThreadCount; tID++)
+        {
+            threads.Add(new Thread((tID) =>
+            {
+                double PartialSum = 0.0;
+
+                for (int i = (int)tID; i <= A.precision + 1; i += A.ThreadCount)
+                {
+                    PartialSum += (Function((i - 1) * A.Delta + A.Left) + Function(i * A.Delta + A.Left)) / 2 * A.Delta;
+                }
+                lock (threads) { resultSumT += PartialSum; }
+            }
+            ));
+            threads.Last().Start(tID);
+        }
+        foreach (var thread in threads) thread.Join();
+        sw.Stop();
+        Console.WriteLine("Результат {0} трапезоидными суммами за {1}мс", resultSumT, sw.ElapsedMilliseconds);
+        //на трапезоидных суммах
+
+        Bound B = new Bound(-100, 0, 100_000_000, 10);
+
+        resultSumM = 0.0;
+        resultSumL = 0.0;
+        resultSumT = 0.0;
+
+        Console.WriteLine("Интегрирование x*e^x на [-100,0] с 10 тредами");
+        //на медианных суммах
+        sw.Restart();
+        for (int tID = 1; tID <= B.ThreadCount; tID++)
+        {
+            threads.Add(new Thread((tID) =>
+            {
+                double PartialSum = 0.0;
+
+                for (int i = (int)tID; i <= B.precision + 1; i += B.ThreadCount)
+                {
+                    PartialSum += Function((double)i * B.Delta - (0.5) * B.Delta + B.Left) * B.Delta;
+                }
+                lock (threads) { resultSumM += PartialSum; }
+            }
+            ));
+            threads.Last().Start(tID);
+        }
+        foreach (var thread in threads) thread.Join();
+        sw.Stop();
+        Console.WriteLine("Результат {0} медианными суммами за {1}мс", resultSumM, sw.ElapsedMilliseconds);
+        //на медианных суммах
+
+        //на левых суммах
+        sw.Restart();
+        threads = new List<Thread>();
+        for (int tID = 1; tID <= B.ThreadCount; tID++)
+        {
+            threads.Add(new Thread((tID) =>
+            {
+                double PartialSum = 0.0;
+
+                for (int i = (int)tID; i <= B.precision + 1; i += B.ThreadCount)
+                {
+                    PartialSum += Function((i - 1) * B.Delta + B.Left) * B.Delta;
+                }
+                lock (threads) { resultSumL += PartialSum; }
+            }
+            ));
+            threads.Last().Start(tID);
+        }
+        foreach (var thread in threads) thread.Join();
+        sw.Stop();
+        Console.WriteLine("Результат {0} левыми суммами за {1}мс", resultSumL, sw.ElapsedMilliseconds);
+        //на левых суммах
+
+        //на трапезоидных суммах
+        sw.Restart();
+        threads = new List<Thread>();
+        for (int tID = 1; tID <= B.ThreadCount; tID++)
+        {
+            threads.Add(new Thread((tID) =>
+            {
+                double PartialSum = 0.0;
+
+                for (int i = (int)tID; i <= B.precision + 1; i += B.ThreadCount)
+                {
+                    PartialSum += (Function((i - 1) * B.Delta + B.Left) + Function(i * B.Delta + B.Left)) / 2 * B.Delta;
+                }
+                lock (threads) { resultSumT += PartialSum; }
+            }
+            ));
+            threads.Last().Start(tID);
+        }
+        foreach (var thread in threads) thread.Join();
+        sw.Stop();
+        Console.WriteLine("Результат {0} трапезоидными суммами за {1}мс", resultSumT, sw.ElapsedMilliseconds);
+        //на трапезоидных суммах
+    }
+
+    public static double Function(double x)
+    {
+        return x * Math.Exp(x); //x*e^x
+    }
+
+
 }

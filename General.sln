@@ -5,6 +5,12 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "General", "General.csproj", "{DC3500FA-C504-4219-BA70-6EDDCB0E795E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task15_Exam", "..\Task15_Exam\Task15_Exam\Task15_Exam.csproj", "{3CD08A1A-1980-4EDC-8175-18593881853B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grafic", "..\WinRAR ZIP archive\Grafic\Grafic.csproj", "{4B0772F8-4E39-4CA4-8415-68FB088BA1F0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Threadings", "..\Threadings-master\Threadings\Threadings.csproj", "{2C67CFB7-C873-4D6D-9568-A364FA92501C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{DC3500FA-C504-4219-BA70-6EDDCB0E795E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC3500FA-C504-4219-BA70-6EDDCB0E795E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC3500FA-C504-4219-BA70-6EDDCB0E795E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CD08A1A-1980-4EDC-8175-18593881853B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CD08A1A-1980-4EDC-8175-18593881853B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CD08A1A-1980-4EDC-8175-18593881853B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CD08A1A-1980-4EDC-8175-18593881853B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B0772F8-4E39-4CA4-8415-68FB088BA1F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B0772F8-4E39-4CA4-8415-68FB088BA1F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B0772F8-4E39-4CA4-8415-68FB088BA1F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B0772F8-4E39-4CA4-8415-68FB088BA1F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C67CFB7-C873-4D6D-9568-A364FA92501C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C67CFB7-C873-4D6D-9568-A364FA92501C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C67CFB7-C873-4D6D-9568-A364FA92501C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C67CFB7-C873-4D6D-9568-A364FA92501C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

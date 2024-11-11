@@ -15,7 +15,7 @@ namespace General;
 public class LoginViewModel : INotifyPropertyChanged
 {
     private RegistrationWindow regWin = new();
-    private GameWindow? _gWnd;
+    private GameWindow? _gWnd;      // Нужно будет создать это окно
     private bool _isvisible = true;
 
     public User CurrentUser { get; } = new();
@@ -32,6 +32,7 @@ public class LoginViewModel : INotifyPropertyChanged
 
 
     private Command? _loginCommand;
+    // EXPL: Команда для авторизации в форме (переменная => {действие}, переменная => {условие для действия})
     public Command LoginCommand => _loginCommand ??= new Command(
         currWnd =>
         {
@@ -91,14 +92,5 @@ public class LoginViewModel : INotifyPropertyChanged
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-    {
-        // Если новое значение не равно старому, то старому значению присваиваем новое и вызываем событие OnPropertyChanged(propertyName) 
-        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-        field = value;
-        OnPropertyChanged(propertyName);
-        return true;
     }
 }
