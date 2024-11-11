@@ -1,0 +1,49 @@
+﻿<Window x:Class="General.RegistrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:General"
+        mc:Ignorable="d"
+        Title="Окно регистрации" Height="350" Width="500" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="LabelStyle">
+            <Setter Property="Label.Margin" Value="4"/>
+            <Setter Property="Label.VerticalAlignment" Value="Top"/>
+            <Setter Property="Label.HorizontalAlignment" Value="Right"/>
+            <Setter Property="Label.FontWeight" Value="Regular"/>
+            <Setter Property="Label.FontStyle" Value="Normal"/>
+            <Setter Property="Label.FontFamily" Value="Segoe UI"/>
+            <Setter Property="Label.FontSize" Value="14"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Label x:Name="LblHeader" Grid.Row="0" Grid.ColumnSpan="2" Content="Регистрация пользователя:" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Segoe UI Black" FontSize="16"/>
+        <Label x:Name="LblName" Grid.Row="1" Grid.Column="0" Content="Имя" Style="{StaticResource LabelStyle}"/>
+        <Label x:Name="LblLogin" Grid.Row="2" Grid.Column="0" Content="Логин" Style="{StaticResource LabelStyle}"/>
+        <Label Name="LblPassword" Grid.Row="3" Grid.Column="0" Content="Пароль" Style="{StaticResource LabelStyle}"/>
+
+        <TextBox x:Name="TbName" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="4, 4, 8, 4" Padding="2" FontSize="14"/>
+        <TextBox x:Name="TbLogin" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="4, 4, 8, 4" Padding="2" FontSize="14"/>
+        <PasswordBox x:Name="PbPassword" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" Margin="4, 4, 8, 4" Padding="2" FontSize="14" PasswordChanged="PbPassword_PasswordChanged"/>
+        <TextBlock x:Name="TbOutput" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" Margin="4, 4, 8, 4" Padding="2" FontSize="10"/>
+
+
+        <Button x:Name="BtnRegistration" Grid.Row="5" Grid.ColumnSpan="2" Content="Зарегистрироваться" VerticalAlignment="Bottom" Margin="4" Padding="6, 8" FontFamily="Bahnschrift SemiCondensed" Background="#FF8663"/>
+    </Grid>
+</Window>
